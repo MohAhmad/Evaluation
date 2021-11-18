@@ -161,7 +161,7 @@ def get_query_status(net: Containernet) -> str:
     crd = get_coordinator(net)
     ip = get_docker_external_ip(crd)
     status = requests.get(url='http://' + ip + ":8081/v1/nes/queryCatalog/status",
-                        params = {"queryId":"1"} , headers=headers)
+                        params = params , headers=headers)
     return status.json()['status']
 
 
@@ -301,8 +301,8 @@ if __name__ == '__main__':
     else:
         info('*** Could not start NES processes!\n')
 
-    sleep(10)
-
+    sleep(5)
+    info('*** add parent_child relationship to topology nodes\n')
     added_topology = set_parent_child_relationship(net)
     if added_topology:
         info('*** successfully added parent_child relationship to topology nodes\n')
@@ -318,7 +318,7 @@ if __name__ == '__main__':
         while (status != "RUNNING"):
             sleep(1)
             print("Status: ", status)
-            get_query_status(net)
+            status = get_query_status(net)
         print("The query is Running!")
         t_end = time.time() + 20
         while time.time() < t_end:
