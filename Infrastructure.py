@@ -293,6 +293,7 @@ if __name__ == '__main__':
     net.start()
     info('*** Starting NES processes\n')
     start_nes_processes(net)
+    info('*** NES processes successfully started!\n')
 
 
     sleep(10)
