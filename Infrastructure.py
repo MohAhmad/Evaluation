@@ -199,11 +199,13 @@ def start_nes_processes(net: Containernet) -> bool:
     for worker in workers:
         worker.cmd(cmd_prefix + crd.IP() + cmd_own_ip + worker.IP() + cmd_suffix_1+str(worker.name)+cmd_suffix_2)
         print("Started worker: ",str(worker.name))
+        sleep(1)
     gateways = get_gateway_nodes(net)
     for gateway in gateways:
        # print(cmd_prefix + crd.IP() + cmd_own_ip + gateway.IP()+'\n')
         gateway.cmd(cmd_prefix + crd.IP() + cmd_own_ip + gateway.IP())
         print("Started gateway: ",str(gateway.name))
+        sleep(1)
     return True
 
 
