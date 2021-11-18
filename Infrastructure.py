@@ -190,7 +190,7 @@ def start_nes_processes(net: Containernet) -> bool:
     crd = get_coordinator(net)
     crd.cmd(
         '/entrypoint-containernet.sh /opt/local/nebula-stream/nesCoordinator --coordinatorIp=10.0.0.1 --restIp=0.0.0.0 && cd /opt/local/nebula-stream && mkdir data && cd /opt/local/nebula-stream/data && touch output.csv')
-    sleep(5)
+    sleep(2)
     info('*** Add Air Quality schema to NES \n')
     response_message = add_airquality_schema(net)
     print(response_message)
@@ -198,11 +198,12 @@ def start_nes_processes(net: Containernet) -> bool:
     workers = get_worker_nodes(net)
     for worker in workers:
         worker.cmd(cmd_prefix + crd.IP() + cmd_own_ip + worker.IP() + cmd_suffix_1+str(worker.name)+cmd_suffix_2)
-        sleep(2)
+        print("Started worker: ",str(worker.name))
     gateways = get_gateway_nodes(net)
     for gateway in gateways:
        # print(cmd_prefix + crd.IP() + cmd_own_ip + gateway.IP()+'\n')
         gateway.cmd(cmd_prefix + crd.IP() + cmd_own_ip + gateway.IP())
+        print("Started gateway: ",str(gateway.name))
     return True
 
 
