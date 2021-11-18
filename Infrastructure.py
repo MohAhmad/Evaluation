@@ -291,7 +291,7 @@ if __name__ == '__main__':
     build_topo(net, depth=depth, fanout=fanout)
     net.start()
     info('*** Starting NES processes\n')
-    #start_nes_processes(net)
+    start_nes_processes(net)
 
 
     sleep(10)
@@ -311,9 +311,8 @@ if __name__ == '__main__':
         while (get_query_status(net)!= "RUNNING"):
             sleep(0.01)
         print("The query is Running!")
-        t_start = time.time()
         t_end = time.time() + 20
-        while t_start < t_end:
+        while time.time() < t_end:
             result = get_num_proccessed_buffers(net)
             print(result.content)
             sleep(1)
