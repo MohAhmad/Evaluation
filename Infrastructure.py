@@ -259,6 +259,7 @@ def set_parent_child_relationship(net: Containernet) -> bool:
                 if not response:
                     return False
                 current_child_id += 1
+                sleep(1)
             current_parent_id += 1
         parent_layer_size = children_layer_size
         children_layer_size *= 2
@@ -313,9 +314,11 @@ if __name__ == '__main__':
     response = execute_query(net)
     if response:
         print(response.content)
-        sleep(5)
-        while (get_query_status(net)!= "RUNNING"):
-            sleep(0.01)
+        status = get_query_status(net)
+        while (status != "RUNNING"):
+            sleep(1)
+            print("Status: ", status)
+            get_query_status(net)
         print("The query is Running!")
         t_end = time.time() + 20
         while time.time() < t_end:
