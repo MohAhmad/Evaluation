@@ -294,9 +294,11 @@ if __name__ == '__main__':
     build_topo(net, depth=depth, fanout=fanout)
     net.start()
     info('*** Starting NES processes\n')
-    start_nes_processes(net)
-    info('*** NES processes successfully started!\n')
-
+    started = start_nes_processes(net)
+    if started:
+        info('*** NES processes successfully started!\n')
+    else:
+        info('*** Could not start NES processes!\n')
 
     sleep(10)
 
