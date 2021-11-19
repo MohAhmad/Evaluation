@@ -259,7 +259,7 @@ def set_parent_child_relationship(net: Containernet) -> bool:
                 if not response:
                     return False
                 current_child_id += 1
-                print("Added relationship between parent ID: ", current_parent_id " and child ID: ", current_child_id)
+                print("Added relationship between parent ID: ", current_parent_id, " and child ID: ", current_child_id)
                 sleep(1)
             current_parent_id += 1
         parent_layer_size = children_layer_size
